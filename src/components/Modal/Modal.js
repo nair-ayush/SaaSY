@@ -9,15 +9,13 @@ class Popup extends Component {
         super(props);
         this.state = {
             modal: false,
-            nestedAddModal: false,
-            nestedDeleteModal: false,
+            nestedModal: false,
             closeAll: false,
             input: "",
             children: this.props.data.children
         };
         this.onToggle = this.onToggle.bind(this);
-        this.onToggleNestedAdd = this.onToggleNestedAdd.bind(this);
-        this.onToggleNestedDelete = this.onToggleNestedDelete.bind(this);
+        this.onToggleNested = this.onToggleNested.bind(this);
         this.toggleAll = this.toggleAll.bind(this);
         this.onInputChange = this.onInputChange.bind(this);
         this.onAdd = this.onAdd.bind(this);
@@ -28,15 +26,9 @@ class Popup extends Component {
             modal: !prevState.modal
         }));
     }
-    onToggleNestedAdd() {
+    onToggleNested() {
         this.setState({
-            nestedAddModal: !this.state.nestedAddModal,
-            closeAll: false
-        });
-    }
-    onToggleNestedDelete() {
-        this.setState({
-            nestedDeleteModal: !this.state.nestedDeleteModal,
+            nestedModal: !this.state.nestedModal,
             closeAll: false
         });
     }
@@ -50,7 +42,7 @@ class Popup extends Component {
         };
         children.push(obj);
         this.setState({
-            nestedAddModal: !this.state.nestedAddModal,
+            nestedModal: !this.state.nestedModal,
             closeAll: false,
             children: children
         });
@@ -58,27 +50,24 @@ class Popup extends Component {
     onDelete() {
         let { children, input } = this.state;
         let obj = children.filter(function (child) {
-            return child.id !== input;
+            return child.id !== parseInt(input);
         })
         this.setState({
-            nestedDeleteModal: !this.state.nestedDeleteModal,
+            nestedModal: !this.state.nestedModal,
             closeAll: false,
             children: obj
         });
     }
     toggleAll() {
         this.setState({
-            nestedAddModal: !this.state.nestedAddModal,
-            // nestedDeleteModal: !this.state.nestedDeleteModal,
+            nestedModal: !this.state.nestedModal,
             closeAll: true
         });
     }
     onInputChange(event) {
         this.setState({ input: event.target.value });
-        // console.log(event.target.value);
     }
     render() {
-        // console.log("Children", children);
         return (
             <div>
                 <Button color="danger" onClick={this.onToggle}>{this.props.buttonLabel}</Button>
@@ -88,31 +77,18 @@ class Popup extends Component {
                         <Lists children={this.state.children} />
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="primary" onClick={this.onToggleNestedAdd}>Add</Button>{" "}
-                        <Modal isOpen={this.state.nestedAddModal} toggle={this.onToggleNestedAdd}
+                        <Button color="primary" onClick={this.onToggleNested}>Modify</Button>{" "}
+                        <Modal isOpen={this.state.nestedModal} toggle={this.onToggleNested}
                             onClosed={
                                 this.state.closeAll ? this.onToggle : undefined
                             }>
-                            <ModalHeader>Add Child</ModalHeader>
+                            <ModalHeader>Add/Delete Child</ModalHeader>
                             <ModalBody>
-                                <InputBar placeholder="Enter Question to Add....." onInputChange={this.onInputChange} />
+                                <InputBar placeholder="Enter Question(Index) to Add(Delete)....." onInputChange={this.onInputChange} />
                             </ModalBody>
                             <ModalFooter>
                                 <Button outline color="success" onClick={this.onAdd}>Add</Button>{" "}
-                                <Button outline color="secondary" onClick={this.toggleAll}>All Done</Button>
-                            </ModalFooter>
-                        </Modal>
-                        <Button color="danger" onclick={this.onToggleNestedDelete}>Delete</Button>{" "}
-                        <Modal isOpen={this.state.nestedDeleteModal} toggle={this.onToggleNestedDelete}
-                            onClosed={
-                                this.state.closeAll ? this.onToggle : undefined
-                            }>
-                            <ModalHeader>Delete Child</ModalHeader>
-                            <ModalBody>
-                                <InputBar placeholder="Enter index of question....." onInputChange={this.onInputChange} />
-                            </ModalBody>
-                            <ModalFooter>
-                                <Button outline color="danger" onClick={this.onAdd}>Delete</Button>{" "}
+                                <Button outline color="danger" onClick={this.onDelete}>Delete</Button>{" "}
                                 <Button outline color="secondary" onClick={this.toggleAll}>All Done</Button>
                             </ModalFooter>
                         </Modal>
