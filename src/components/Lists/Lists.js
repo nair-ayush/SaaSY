@@ -1,19 +1,28 @@
-import React, { Component } from 'react';
-import { ListGroup, ListGroupItem, Badge } from 'reactstrap';
+import React, { Component } from "react";
+import { ListGroup, ListGroupItem } from "reactstrap";
 
 export default class Lists extends Component {
+
     render() {
+        let elements = [];
+        // console.log("Lists", this.props);
+        for (let i = 0; i < this.props.children.length; i++) {
+            // push the component to elements!
+            elements.push(
+                <ListGroupItem
+                    tag="a"
+                    href="#"
+                    action
+                    key={this.props.children[i].id}
+                >
+                    {this.props.children[i].id + ". " + this.props.children[i].question}
+                </ListGroupItem>
+            );
+        }
         return (
             <div>
-                <ListGroup>
-                    <ListGroupItem tag="a" href="#" action>Child 1 <Badge pill>42</Badge></ListGroupItem>
-                    <ListGroupItem tag="a" href="#" action>Child 2 <Badge pill>34</Badge></ListGroupItem>
-                    <ListGroupItem tag="a" href="#" action>Child 3 <Badge pill>12</Badge></ListGroupItem>
-                    <ListGroupItem tag="a" href="#" action>Child 4 <Badge pill>70</Badge></ListGroupItem>
-                    <ListGroupItem tag="a" href="#" action>Child 5 <Badge pill>14</Badge></ListGroupItem>
-                </ListGroup>
+                <ListGroup>{elements}</ListGroup>
             </div>
         );
     }
 }
-
