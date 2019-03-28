@@ -15,7 +15,7 @@ export default class Lists extends Component {
                     action
                     key={this.props.children[i].id}
                 >
-                    {this.props.children[i].id + ". " + this.props.children[i].question}
+                    {this.props.children[i].id + ". " + this.props.children[i].name}
                 </ListGroupItem>
             );
         }

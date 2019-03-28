@@ -12,6 +12,8 @@ class Popup extends Component {
             nestedModal: false,
             closeAll: false,
             input: "",
+            keyProp: this.props.keyProp,
+            idProp: this.props.idProp,
             children: this.props.data.children
         };
         this.onToggle = this.onToggle.bind(this);
@@ -38,7 +40,7 @@ class Popup extends Component {
         // let children = this.state.children;
         const obj = {
             id: id,
-            question: this.state.input
+            name: this.state.input
         };
         children.push(obj);
         this.setState({
@@ -70,9 +72,9 @@ class Popup extends Component {
     render() {
         return (
             <div>
-                <Button color="danger" onClick={this.onToggle}>{this.props.buttonLabel}</Button>
+                {/* <Button color="danger" onClick={this.onToggle}>{this.props.buttonLabel}</Button> */}
                 <Modal isOpen={this.state.modal} onToggle={this.onToggle} className={this.props.className}>
-                    <ModalHeader onToggle={this.onToggle}>{this.props.data.question}</ModalHeader>
+                    <ModalHeader onToggle={this.onToggle}>{this.props.data.name}</ModalHeader>
                     <ModalBody>
                         <Lists children={this.state.children} />
                     </ModalBody>
