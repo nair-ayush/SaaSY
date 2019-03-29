@@ -1,5 +1,6 @@
 div.custom-container {
-	background-color: #242424;
+  background-color: grey;
+  padding: 1%;
 }
 
 svg.custom .node circle {
@@ -9,13 +10,13 @@ svg.custom .node circle {
 }
 
 .white-text {
-	fill: white;
-	stroke: white;
+	fill: black;
+	stroke:black;
 }
 
 svg.custom .node text {
-	font-size: 11px;
-	background-color: #444;
+  font-size: 11px;
+	background-color:white;
 	fill: #F4F4F4;
 	text-shadow: 0 1px 4px black;
 }
@@ -32,34 +33,10 @@ svg.custom path.link {
 
 .App {
   text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
+}
+.center {
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
