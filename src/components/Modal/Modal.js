@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import Lists from "../Lists/Lists";
 import InputBar from "../InputBar/InputBar";
+const axios = require('axios');
 
 class Popup extends Component {
     constructor(props) {
@@ -33,13 +34,20 @@ class Popup extends Component {
     }
     onAdd() {
         var { children } = this.state;
-        const id = children[children.length - 1].id + 1;
-        // let children = this.state.children;
+        // const id = children.length ? children[children.length - 1].id + 1 : 1;
+        // // let children = this.state.children;
         const obj = {
-            id: id,
+            id: 'kawbrgejbgsekbgk',
             name: this.state.input
         };
         children.push(obj);
+        axios.post('http://35.154.175.45/project/add-child', {
+            child: {
+                key: this.state.input
+            },
+            parentId: this.props.data._id
+        })
+            .then(response => console.log(response))
         this.setState({
             nestedModal: !this.state.nestedModal,
             closeAll: false,
@@ -50,6 +58,10 @@ class Popup extends Component {
         let { children, input } = this.state;
         let obj = children.filter(function (child) {
             return child.id !== parseInt(input);
+        })
+        axios.post('http://35.154.175.45/project/delete-child', {
+            childId: this.state.input,
+            parentId: this.props.data._id
         })
         this.setState({
             nestedModal: !this.state.nestedModal,
@@ -74,7 +86,7 @@ class Popup extends Component {
                 <Modal isOpen={this.state.modal} onToggle={this.onToggle} className={this.props.className}>
                     <ModalHeader onToggle={this.onToggle}>{this.props.data.name}</ModalHeader>
                     <ModalBody>
-                        <Lists children={this.state.children} />
+                        <Lists children={this.state.children} onDelete={this.onDelete} />
                     </ModalBody>
                     <ModalFooter>
                         <Button color="primary" onClick={this.onToggleNested}>Modify</Button>{" "}

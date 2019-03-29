@@ -10,12 +10,12 @@ export default class Lists extends Component {
             // push the component to elements!
             elements.push(
                 <ListGroupItem
-                    tag="a"
-                    href="#"
-                    action
-                    key={this.props.children[i].id}
+                    // tag="a"
+                    // href="#"
+                    // action
+                    key={this.props.children[i]._id}
                 >
-                    {this.props.children[i].id + ". " + this.props.children[i].name}
+                    {this.props.children[i]._id + ". " + this.props.children[i].name}
                 </ListGroupItem>
             );
         }

@@ -811,7 +811,7 @@ class App extends Component {
         // onCLICK
         // console.log(nodeKey);
         this.setState({
-            nodeClicked: true
+            clicked: true
         })
     };
     onHandleClose = () => {
@@ -867,8 +867,8 @@ class App extends Component {
                 <div className="custom-container">
                     <Tree
                         data={this.state.data}
-                        height={2500}
-                        width={1200}
+                        height={height}
+                        width={width / 2}
                         gProps={{
                             className: 'white-text',
                             onClick: this.onClick
@@ -886,7 +886,7 @@ class App extends Component {
                     onMessageWasSent={this._onMessageWasSent.bind(this)}
                     messageList={this.state.messageList}
                 />
-                {this.state.clicked ? <Popup data={this.state.data.children[0].children[0]} modal={this.state.clicked} onModalClose={this.onHandleClose} /> : null}
+                {this.state.clicked ? <Popup data={this.state.data} modal={this.state.clicked} onModalClose={this.onHandleClose} /> : null}
             </div>
         );
         //     default:
