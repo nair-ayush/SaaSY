@@ -54,6 +54,9 @@ class App extends Component {
             childName: nodeKey
         }).then(response => {
             console.log(response);
+            const node = response.data;
+            node.name = node.key;
+            delete node.key;
             this.setState({
                 clicked: true,
                 node: response.data
@@ -94,7 +97,6 @@ class App extends Component {
     };
     render() {
         const { route, height, width } = this.state;
-        console.log(this.state.clicked);
         return (
             <div className="App">
                 <NavBar route={route} onRouteChange={this.onRouteChange} />
