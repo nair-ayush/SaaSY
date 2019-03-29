@@ -4,7 +4,8 @@ import NavBar from "../../components/NavBar/NavBar";
 import Popup from "../../components/Modal/Modal";
 // import logo from './logo.svg';
 import './App.css';
-import {Launcher} from "react-chat-window";
+import { Launcher } from "react-chat-window";
+import { timingSafeEqual } from "crypto";
 class App extends Component {
     constructor() {
         super();
@@ -766,42 +767,46 @@ class App extends Component {
                     }]
                 }]
             },
+            route: 'signIn',
             messageList: [],
-            nodeClicked : false
+            nodeClicked: false
         };
         this.onClick = this.onClick.bind(this);
     }
     onClick = (event, nodeKey) => {
         // onCLICK
         this.setState({
-          nodeClicked: true
+            nodeClicked: true
         })
         // add your modal
         // alert(nodeKey);
     };
 
-  _onMessageWasSent(message) {
-    this.setState({
-      messageList: [...this.state.messageList, message]
-    })
-  }
-
-  _sendMessage(text) {
-    if (text.length > 0) {
-      this.setState({
-        messageList: [...this.state.messageList, {
-          author: 'them',
-          type: 'text',
-          data: { text }
-        }]
-      })
+    _onMessageWasSent(message) {
+        this.setState({
+            messageList: [...this.state.messageList, message]
+        })
     }
-  }
 
+    _sendMessage(text) {
+        if (text.length > 0) {
+            this.setState({
+                messageList: [...this.state.messageList, {
+                    author: 'them',
+                    type: 'text',
+                    data: { text }
+                }]
+            })
+        }
+    }
+    onRouteChange = route => {
+        this.setState({ route: route });
+    };
     render() {
+        const { route } = this.state;
         return (
             <div className="App">
-                <NavBar />
+                <NavBar route={route} onRouteChange={this.onRouteChange} />
                 <div className="custom-container">
                     <Tree
                         data={this.state.data}
@@ -815,16 +820,16 @@ class App extends Component {
                             className: 'custom'
                         }}
                         animated />
-                  <Launcher
-                      agentProfile={{
-                        teamName: 'react-chat-window',
-                        imageUrl: 'https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png'
-                      }}
-                      onMessageWasSent={this._onMessageWasSent.bind(this)}
-                      messageList={this.state.messageList}
-                      showEmoji
-                  />
-                  {this.state.nodeClicked ? <Popup data={this.state.data.children[0].children[0]}/> : null}
+                    <Launcher
+                        agentProfile={{
+                            teamName: 'react-chat-window',
+                            imageUrl: 'https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png'
+                        }}
+                        onMessageWasSent={this._onMessageWasSent.bind(this)}
+                        messageList={this.state.messageList}
+                        showEmoji
+                    />
+                    {this.state.nodeClicked ? <Popup data={this.state.data.children[0].children[0]} /> : null}
                 </div>
             </div>
         );

@@ -9,7 +9,8 @@
         "react-dom": "^16.8.4",
         "react-scripts": "2.1.8",
         "react-tree-graph": "^4.0.0",
-        "reactstrap": "^7.1.0"
+        "reactstrap": "^7.1.0",
+        "tachyons": "^4.11.1"
     },
     "scripts": {
         "start": "react-scripts start",
