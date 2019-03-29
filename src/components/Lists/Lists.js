@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { ListGroup, ListGroupItem } from "reactstrap";
 
 export default class Lists extends Component {
-
     render() {
         let elements = [];
         // console.log("Lists", this.props);
@@ -12,7 +11,7 @@ export default class Lists extends Component {
                 <ListGroupItem
                     // tag="a"
                     // href="#"
-                    // action
+                    // onClick={this.props.onDelete}
                     key={this.props.children[i]._id}
                 >
                     {this.props.children[i]._id + ". " + this.props.children[i].name}

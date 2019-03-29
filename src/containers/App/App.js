@@ -776,6 +776,7 @@ class App extends Component {
             },
             clicked: false,
             height: 2500,
+            node: null,
             width: 1200,
             messageList: [{
                 author: 'them',
@@ -797,7 +798,6 @@ class App extends Component {
     componentWillMount() {
         axios.get('http://35.154.175.45/user/myntra')
             .then(response => {
-                console.log(response.data)
                 this.setState({
                     data: response.data
                 })
@@ -810,9 +810,17 @@ class App extends Component {
     onClick = (event, nodeKey) => {
         // onCLICK
         // console.log(nodeKey);
-        this.setState({
-            clicked: true
+        // const nodeObject;
+        // let data;
+        axios.post('http://35.154.175.45/project/get-child-by-name', {
+            childName: nodeKey
+        }).then(response => {
+            this.setState({
+                clicked: true,
+                node: response.data
+            })
         })
+
     };
     onHandleClose = () => {
         this.setState({ clicked: false })
@@ -844,7 +852,7 @@ class App extends Component {
     };
     render() {
         const { route, height, width } = this.state;
-        console.log('state', this.state);
+        // console.log('state', this.state);
         // switch (this.state.route) {
         //     case "signIn":
         //         return (
@@ -886,7 +894,7 @@ class App extends Component {
                     onMessageWasSent={this._onMessageWasSent.bind(this)}
                     messageList={this.state.messageList}
                 />
-                {this.state.clicked ? <Popup data={this.state.data} modal={this.state.clicked} onModalClose={this.onHandleClose} /> : null}
+                {this.state.clicked ? <Popup data={this.state.node} modal={this.state.clicked} onModalClose={this.onHandleClose} /> : null}
             </div>
         );
         //     default:

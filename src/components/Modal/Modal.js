@@ -25,6 +25,7 @@ class Popup extends Component {
         this.setState(prevState => ({
             modal: !prevState.modal
         }));
+        // location.reload(true);
     }
     onToggleNested() {
         this.setState({
@@ -36,18 +37,22 @@ class Popup extends Component {
         var { children } = this.state;
         // const id = children.length ? children[children.length - 1].id + 1 : 1;
         // // let children = this.state.children;
-        const obj = {
-            id: 'kawbrgejbgsekbgk',
-            name: this.state.input
-        };
-        children.push(obj);
+
         axios.post('http://35.154.175.45/project/add-child', {
             child: {
                 key: this.state.input
             },
             parentId: this.props.data._id
         })
-            .then(response => console.log(response))
+            .then(response => {
+                const obj = {
+                    _id: response.data._id,
+                    name: this.state.input
+                };
+                children.push(obj);
+                this.setState(children);
+            })
+            .catch(err => console.log(err))
         this.setState({
             nestedModal: !this.state.nestedModal,
             closeAll: false,
@@ -57,12 +62,13 @@ class Popup extends Component {
     onDelete() {
         let { children, input } = this.state;
         let obj = children.filter(function (child) {
-            return child.id !== parseInt(input);
+            return child._id !== parseInt(input);
         })
+        console.log(obj);
         axios.post('http://35.154.175.45/project/delete-child', {
-            childId: this.state.input,
+            childId: input,
             parentId: this.props.data._id
-        })
+        }).catch(err => console.log(err))
         this.setState({
             nestedModal: !this.state.nestedModal,
             closeAll: false,
