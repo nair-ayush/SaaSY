@@ -14,9 +14,6 @@ class SignIn extends Component {
     onPasswordChange = (event) => {
         this.setState({ password: event.target.value });
     }
-    onSubmit = () => {
-        this.props.onRouteChange('home');
-    }
     handleSubmit = (event) => {
         event.preventDefault();
         const { email, password } = this.state;

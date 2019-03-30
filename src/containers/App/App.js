@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Tree from "react-tree-graph";
+import Popup from "../../containers/Modal/Modal";
 import NavBar from "../../components/NavBar/NavBar";
-import Popup from "../../components/Modal/Modal";
 import SignIn from "../../components/Login/Login";
 import Register from "../../components/Register/Register";
 import './App.css';
@@ -135,13 +135,13 @@ class App extends Component {
                         </div>
                         <Launcher
                             agentProfile={{
-                                teamName: 'SaaSY chat   ',
+                                teamName: 'SaaSY chat',
                                 imageUrl: 'https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png'
                             }}
                             onMessageWasSent={this._onMessageWasSent.bind(this)}
                             messageList={this.state.messageList}
                         />
-                        {this.state.clicked ? <Popup tree={this.state.data} data={this.state.node} modal={this.state.clicked} onModalClose={this.onHandleClose} reflectModalChanges={this.reflectModalChanges} /> : null}
+                        {this.state.clicked ? <Popup tree={this.state.data} data={this.state.node} onModalClose={this.onHandleClose} reflectModalChanges={this.reflectModalChanges} /> : null}
                     </div>
                 );
             default:
