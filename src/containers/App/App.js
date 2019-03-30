@@ -95,37 +95,54 @@ class App extends Component {
     };
     render() {
         const { route, height, width } = this.state;
-        return (
-            <div className="App">
-                <NavBar route={route} onRouteChange={this.onRouteChange} />
-                <div className="custom-container">
-                    <Tree
-                        data={this.state.data}
-                        height={height}
-                        width={width / 1.2}
-                        gProps={{
-                            className: 'white-text',
-                            onClick: this.onClick
-                        }}
-                        svgProps={{
-                            className: 'custom'
-                        }}
-                        animated />
-                </div>
-                <Launcher
-                    agentProfile={{
-                        teamName: 'SaaSY chat   ',
-                        imageUrl: 'https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png'
-                    }}
-                    onMessageWasSent={this._onMessageWasSent.bind(this)}
-                    messageList={this.state.messageList}
-                />
-                {this.state.clicked ? <Popup data={this.state.node} modal={this.state.clicked} onModalClose={this.onHandleClose} /> : null}
-            </div>
-        );
-        //     default:
-        //         break;
-        // }
+        console.log('state', this.state);
+        switch (this.state.route) {
+            case "signIn":
+                return (
+                    <div className="App">
+                        <NavBar route={route} onRouteChange={this.onRouteChange} />
+                        <SignIn onRouteChange={this.onRouteChange} />
+                    </div>
+                );
+            case "register":
+                return (
+                    <div className="App">
+                        <NavBar route={route} onRouteChange={this.onRouteChange} />
+                        <Register onRouteChange={this.onRouteChange} />
+                    </div>
+                )
+            case "home":
+                return (
+                    <div className="App">
+                        <NavBar route={route} onRouteChange={this.onRouteChange} />
+                        <div className="custom-container">
+                            <Tree
+                                data={this.state.data}
+                                height={height}
+                                width={width / 1.2}
+                                gProps={{
+                                    className: 'white-text',
+                                    onClick: this.onClick
+                                }}
+                                svgProps={{
+                                    className: 'custom'
+                                }}
+                                animated />
+                        </div>
+                        <Launcher
+                            agentProfile={{
+                                teamName: 'SaaSY chat   ',
+                                imageUrl: 'https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png'
+                            }}
+                            onMessageWasSent={this._onMessageWasSent.bind(this)}
+                            messageList={this.state.messageList}
+                        />
+                        {this.state.clicked ? <Popup data={this.state.node} modal={this.state.clicked} onModalClose={this.onHandleClose} /> : null}
+                    </div>
+                );
+            default:
+                break;
+        }
     }
 }
 
