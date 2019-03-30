@@ -14,7 +14,7 @@ class Popup extends Component {
             input: "",
             children: this.props.data.children
         };
-        console.log("Modal props: " + JSON.stringify(props));
+        // console.log("Modal props: " + JSON.stringify(props));
         this.onToggle = this.onToggle.bind(this);
         this.onToggleNested = this.onToggleNested.bind(this);
         this.toggleAll = this.toggleAll.bind(this);
@@ -65,7 +65,7 @@ class Popup extends Component {
         let obj = children.filter(function (child) {
             return child._id !== parseInt(input);
         })
-        console.log(obj);
+        // console.log(obj);
         axios.post('http://35.154.175.45/project/delete-child', {
             childId: input,
             parentId: this.props.data._id
@@ -87,7 +87,11 @@ class Popup extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({modal: nextProps.modal})
+        console.log(nextProps.data.children)
+        this.setState({
+            modal: nextProps.modal,
+            children: nextProps.data.children
+        })
     }
 
     render() {

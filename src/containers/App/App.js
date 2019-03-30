@@ -12,7 +12,7 @@ class App extends Component {
     constructor() {
         super();
         this.state = {
-           
+
             route: "signIn",
             data: {},
             clicked: false,
@@ -22,15 +22,15 @@ class App extends Component {
             messageList: [{
                 author: 'them',
                 type: 'text',
-                data: { text: 'flare' }
+                data: { text: 'Are you looking for male wear or female wear?' }
             }, {
                 author: 'them',
                 type: 'text',
-                data: { text: 'abracadabre' }
+                data: { text: 'option 1' }
             }, {
                 author: 'them',
                 type: 'text',
-                data: { text: 'bsioflf' }
+                data: { text: 'option 2' }
             }]
         };
         this.onHandleClose = this.onHandleClose.bind(this);
@@ -39,7 +39,7 @@ class App extends Component {
     componentWillMount() {
         axios.get('http://35.154.175.45/user/myntra')
             .then(response => {
-                  console.log(response);
+                // console.log(response);
                 this.setState({
                     data: response.data
                 })
@@ -53,21 +53,15 @@ class App extends Component {
         axios.post('http://35.154.175.45/project/get-child-by-name', {
             childName: nodeKey
         }).then(response => {
-<<<<<<< HEAD
-            console.log(response)
-=======
-            console.log(response);
             const node = response.data;
-            node.name = node.key;
-            delete node.key;
->>>>>>> 599c80f1e9c3fdc7ab097b3fc8fcd9149e650fbe
+            console.log(node);
             this.setState({
                 clicked: true,
-                node: response.data
+                node
             })
-            .catch(err => {
-                  console.error(err);
-            })
+                .catch(err => {
+                    console.error(err);
+                })
         })
 
     };
@@ -108,7 +102,7 @@ class App extends Component {
                     <Tree
                         data={this.state.data}
                         height={height}
-                        width={width / 2}
+                        width={width / 1.2}
                         gProps={{
                             className: 'white-text',
                             onClick: this.onClick
