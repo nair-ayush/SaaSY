@@ -8,12 +8,13 @@ class Popup extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            modal: this.props.clicked,
+            modal: this.props.modal,
             nestedModal: false,
             closeAll: false,
             input: "",
             children: this.props.data.children
         };
+        console.log("Modal props: " + JSON.stringify(props));
         this.onToggle = this.onToggle.bind(this);
         this.onToggleNested = this.onToggleNested.bind(this);
         this.toggleAll = this.toggleAll.bind(this);
@@ -84,8 +85,12 @@ class Popup extends Component {
     onInputChange(event) {
         this.setState({ input: event.target.value });
     }
-    render() {
 
+    componentWillReceiveProps(nextProps) {
+        this.setState({modal: nextProps.modal})
+    }
+
+    render() {
         return (
             <div>
                 <Button color="danger" onClick={this.onToggle}>{this.props.buttonLabel}</Button>
