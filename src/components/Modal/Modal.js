@@ -12,7 +12,8 @@ class Popup extends Component {
             nestedModal: false,
             closeAll: false,
             input: "",
-            children: this.props.data.children
+            children: this.props.data.children,
+            deletedChild: false
         };
         // console.log("Modal props: " + JSON.stringify(props));
         this.onToggle = this.onToggle.bind(this);
@@ -22,12 +23,23 @@ class Popup extends Component {
         this.onAdd = this.onAdd.bind(this);
         this.onDelete = this.onDelete.bind(this);
     }
+    getChildByName(childName) {
+        axios.post('http://35.154.175.45/project/get-child-by-name', {
+            childName: childName
+        }).then(response => {
+            const node = response.data;
+            this.setState({
+                deletedChild: node
+            })
+            // console.log(node);
+        })
+    }
     onToggle() {
         if (this.state.modal) {
             console.log('closing modal');
             axios.get('http://35.154.175.45/user/myntra')
                 .then(response => {
-                    console.log(response.data);
+                    // console.log(response.data);
                     this.props.reflectModalChanges(response.data)
                 })
         }
@@ -70,23 +82,23 @@ class Popup extends Component {
     }
     onDelete() {
         let { children, input } = this.state;
-        let obj = children.filter(function (child) {
-            return child._id !== parseInt(input);
-        })
-        // console.log(obj);
+        const child = this.getChild
+        this.getChildByName(input);
+        children.splice(children.indexOf(this.state.deletedChild), 1);
         axios.post('http://35.154.175.45/project/delete-child', {
             childId: input,
             parentId: this.props.data._id
         }).then(response => {
             this.setState({
-                children: obj
+                children
             })
         })
             .catch(err => console.log(err))
+        // console.log(this.state.children);
         this.setState({
             nestedModal: !this.state.nestedModal,
             closeAll: false,
-            children: obj
+            children
         });
     }
     toggleAll() {
