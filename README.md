@@ -15,9 +15,9 @@ Our immediate user (the company’s staff, not the end user) can maintain multip
 Whether the nodes contain further questions or final options is entirely up to our users.
 
 # Usage
-A user can login using their credentials and enter the dashboard which looks like ![this](github.com/nair-ayush/saasy/screenshots/dashboard.png/ "Dashboard"). 
+A user can login using their credentials and enter the dashboard which looks like ![this](screenshots/dashboard.png/ "Dashboard"). 
 
-On clicking the chat window ![icon](github.com/nair-ayush/saasy/screenshots/chatwindow.png/ "Chat Window") you can see what the end user product will look like based on the tree.
+On clicking the chat window ![icon](screenshots/chatwindow.png/ "Chat Window") you can see what the end user product will look like based on the tree.
 
 To add more nodes, click on a particular node to add more children. On clicking a node, a modal will popup showcasing it's children and their id's. Click on the modify button to add/delete nodes. 
 * To add a node then enter the question and press `Add`.
