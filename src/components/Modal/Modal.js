@@ -23,6 +23,14 @@ class Popup extends Component {
         this.onDelete = this.onDelete.bind(this);
     }
     onToggle() {
+        if (this.state.modal) {
+            console.log('closing modal');
+            axios.get('http://35.154.175.45/user/myntra')
+                .then(response => {
+                    console.log(response.data);
+                    this.props.reflectModalChanges(response.data)
+                })
+        }
         this.setState(prevState => ({
             modal: !prevState.modal
         }));
@@ -69,7 +77,12 @@ class Popup extends Component {
         axios.post('http://35.154.175.45/project/delete-child', {
             childId: input,
             parentId: this.props.data._id
-        }).catch(err => console.log(err))
+        }).then(response => {
+            this.setState({
+                children: obj
+            })
+        })
+            .catch(err => console.log(err))
         this.setState({
             nestedModal: !this.state.nestedModal,
             closeAll: false,

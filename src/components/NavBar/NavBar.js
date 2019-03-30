@@ -21,9 +21,9 @@ class NavBar extends Component {
                                     <NavItem>
                                         <NavLink href="">Home</NavLink>
                                     </NavItem>
-                                    <NavItem>
+                                    {/* <NavItem>
                                         <NavLink href="">Profile</NavLink>
-                                    </NavItem>
+                                    </NavItem> */}
                                     <NavItem>
                                         <NavLink onClick={() => this.props.onRouteChange('signIn')}>Logout</NavLink>
                                     </NavItem>
