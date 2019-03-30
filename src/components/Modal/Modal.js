@@ -81,6 +81,7 @@ class Popup extends Component {
             nestedModal: !this.state.nestedModal,
             closeAll: true
         });
+
     }
     onInputChange(event) {
         this.setState({ input: event.target.value });
