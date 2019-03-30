@@ -815,6 +815,7 @@ class App extends Component {
         axios.post('http://35.154.175.45/project/get-child-by-name', {
             childName: nodeKey
         }).then(response => {
+            console.log(response)
             this.setState({
                 clicked: true,
                 node: response.data
