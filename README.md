@@ -51,6 +51,10 @@ As of right now the chat-window is static and keep on the lookout for updates to
 6. firebase
 7. react-router-dom
 
+## Developers
+* [@nair-ayush](https://github.com/nair-ayush/)
+* [@kanishk98](https://github.com/kanishk98/)
+* [@padiboi](https://github.com/padiboi/)
 ## Contributing
 
 Fork this repo and checkout to new branch off the `develop` branch. `master` for now shows the standard react view from `create-react-app`
