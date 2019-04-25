@@ -8,6 +8,8 @@ import './App.css';
 import { Launcher } from "react-chat-window";
 const axios = require('axios');
 // import { timingSafeEqual } from "crypto";
+
+const API_IP = "13.127.145.212";
 class App extends Component {
     constructor() {
         super();
@@ -41,7 +43,7 @@ class App extends Component {
         this.setState({ data, clicked: false });
     }
     componentWillMount() {
-        axios.get('http://35.154.175.45/user/myntra')
+        axios.get('http://' + API_IP + '/user/myntra')
             .then(response => {
                 // console.log(response);
                 this.setState({
@@ -54,7 +56,7 @@ class App extends Component {
         });
     }
     onClick = (event, nodeKey) => {
-        axios.post('http://35.154.175.45/project/get-child-by-name', {
+        axios.post('http://' + API_IP + '/project/get-child-by-name', {
             childName: nodeKey
         }).then(response => {
             const node = response.data;
