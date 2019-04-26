@@ -36,7 +36,7 @@ class App extends Component {
             }]
         };
         this.onHandleClose = this.onHandleClose.bind(this);
-        this.onClick = this.onClick.bind(this);
+        // this.onClick = this.onClick.bind(this);
         this.reflectModalChanges = this.reflectModalChanges.bind(this);
     }
     reflectModalChanges(data) {
@@ -61,13 +61,13 @@ class App extends Component {
         }).then(response => {
             const node = response.data;
             console.log(node);
+            // debugger;
             this.setState({
                 clicked: true,
                 node
             })
-                .catch(err => {
-                    console.error(err);
-                })
+        }).catch(err => {
+            console.error(err);
         })
 
     };

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Input } from 'reactstrap';
 
-const InputBar = ({ placeholder, onInputChange }) => {
+const InputBar = ({ placeholder, onInputChange, name }) => {
     return (
         <div>
-            <Input placeholder={placeholder} onChange={onInputChange}/>
+            <Input placeholder={placeholder} name={name} onChange={onInputChange} />
         </div>
     );
 };

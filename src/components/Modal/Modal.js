@@ -4,6 +4,7 @@ import Lists from "../Lists/Lists";
 import InputBar from "../InputBar/InputBar";
 const axios = require('axios');
 
+const API_IP = "13.127.145.212";
 class Popup extends Component {
     constructor(props) {
         super(props);
@@ -13,7 +14,10 @@ class Popup extends Component {
             closeAll: false,
             input: "",
             children: this.props.data.children,
-            deletedChild: false
+            deletedChild: false,
+            answer1: "",
+            answer2: "",
+            answer3: ""
         };
         // console.log("Modal props: " + JSON.stringify(props));
         this.onToggle = this.onToggle.bind(this);
@@ -24,7 +28,7 @@ class Popup extends Component {
         this.onDelete = this.onDelete.bind(this);
     }
     getChildByName(childName) {
-        axios.post('http://35.154.175.45/project/get-child-by-name', {
+        axios.post('http://' + API_IP + '/project/get-child-by-name', {
             childName: childName
         }).then(response => {
             const node = response.data;
@@ -37,7 +41,7 @@ class Popup extends Component {
     onToggle() {
         if (this.state.modal) {
             console.log('closing modal');
-            axios.get('http://35.154.175.45/user/myntra')
+            axios.get('http://' + API_IP + '/user/myntra')
                 .then(response => {
                     // console.log(response.data);
                     this.props.reflectModalChanges(response.data)
@@ -54,12 +58,19 @@ class Popup extends Component {
             closeAll: false
         });
     }
+    onAnswerAdd() {
+
+    }
     onAdd() {
-        var { children } = this.state;
+        var { children, answer1, answer2, answer3 } = this.state;
         // const id = children.length ? children[children.length - 1].id + 1 : 1;
         // // let children = this.state.children;
-
-        axios.post('http://35.154.175.45/project/add-child', {
+        const answers=[answer1,answer2,answer3];
+        const filtered=answers.filter(function (value, index, arr) {
+            return value!=""
+        })
+        console.log(filtered);
+        axios.post('http://' + API_IP + '/project/add-child', {
             child: {
                 key: this.state.input
             },
@@ -85,7 +96,7 @@ class Popup extends Component {
         const child = this.getChild
         this.getChildByName(input);
         children.splice(children.indexOf(this.state.deletedChild), 1);
-        axios.post('http://35.154.175.45/project/delete-child', {
+        axios.post('http://' + API_IP + '/project/delete-child', {
             childId: input,
             parentId: this.props.data._id
         }).then(response => {
@@ -109,7 +120,8 @@ class Popup extends Component {
 
     }
     onInputChange(event) {
-        this.setState({ input: event.target.value });
+        // console.log(event.target.value, event.target.name);
+        this.setState({ [event.target.name]: event.target.value });
     }
 
     componentWillReceiveProps(nextProps) {
@@ -137,7 +149,11 @@ class Popup extends Component {
                             }>
                             <ModalHeader>Add/Delete Child</ModalHeader>
                             <ModalBody>
-                                <InputBar placeholder="Enter Question(Index) to Add(Delete)....." onInputChange={this.onInputChange} />
+                                <InputBar placeholder="Enter Question(Index) to Add(Delete)....." name="input" onInputChange={this.onInputChange} />
+                                <h4>Add one or more answers below</h4>
+                                <InputBar placeholder="Enter the first answer...." name="answer1" onInputChange={this.onInputChange} />
+                                <InputBar placeholder="Enter the second answer...." name="answer2" onInputChange={this.onInputChange} />
+                                <InputBar placeholder="Enter the third answer...." name="answer3" onInputChange={this.onInputChange} />
                             </ModalBody>
                             <ModalFooter>
                                 <Button outline color="success" onClick={this.onAdd}>Add</Button>{" "}
