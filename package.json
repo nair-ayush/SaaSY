@@ -5,6 +5,7 @@
   "dependencies": {
     "bootstrap": "^4.3.1",
     "d3": "^5.9.2",
+    "pre-commit": "^1.2.2",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-scripts": "2.1.8",
@@ -14,16 +15,28 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "xo && react-scripts test && htmlhint *.html && stylelint *.css",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
   },
+  "stylelint": {
+    "extends": "stylelint-config-recommended"
+  },
+  "pre-commit": [
+    "test"
+  ],
   "browserslist": [
     ">0.2%",
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "htmlhint": "^0.11.0",
+    "stylelint": "^10.0.1",
+    "stylelint-config-recommended": "^2.2.0",
+    "xo": "^0.24.0"
+  }
 }
