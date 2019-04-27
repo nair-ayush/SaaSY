@@ -4,6 +4,7 @@ import Lists from "../Lists/Lists";
 import InputBar from "../InputBar/InputBar";
 const axios = require('axios');
 
+const API_IP = "13.127.145.212";
 class Popup extends Component {
     constructor(props) {
         super(props);
@@ -24,7 +25,7 @@ class Popup extends Component {
         this.onDelete = this.onDelete.bind(this);
     }
     getChildByName(childName) {
-        axios.post('http://35.154.175.45/project/get-child-by-name', {
+        axios.post('http://13.127.145.212/project/get-child-by-name', {
             childName: childName
         }).then(response => {
             const node = response.data;
@@ -42,7 +43,7 @@ class Popup extends Component {
     onToggle() {
         if (this.state.modal) {
             console.log('closing modal');
-            axios.get('http://35.154.175.45/user/myntra')
+            axios.get('http://13.127.145.212/user/myntra')
                 .then(response => {
                     // console.log(response.data);
                     this.props.reflectModalChanges(response.data)
@@ -64,7 +65,7 @@ class Popup extends Component {
         // const id = children.length ? children[children.length - 1].id + 1 : 1;
         // // let children = this.state.children;
 
-        axios.post('http://35.154.175.45/project/add-child', {
+        axios.post('http://13.127.145.212/project/add-child', {
             child: {
                 key: this.state.input
             },
@@ -90,7 +91,7 @@ class Popup extends Component {
         const child = this.getChild
         this.getChildByName(input);
         children.splice(children.indexOf(this.state.deletedChild), 1);
-        axios.post('http://35.154.175.45/project/delete-child', {
+        axios.post('http://13.127.145.212/project/delete-child', {
             childId: input,
             parentId: this.props.data._id
         }).then(response => {
