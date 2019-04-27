@@ -17,7 +17,8 @@ class Popup extends Component {
             deletedChild: false,
             answer1: "",
             answer2: "",
-            answer3: ""
+            answer3: "",
+            tick: false
         };
         // console.log("Modal props: " + JSON.stringify(props));
         this.onToggle = this.onToggle.bind(this);
@@ -36,6 +37,11 @@ class Popup extends Component {
                 deletedChild: node
             })
             // console.log(node);
+        })
+    }
+    onTick = () => {
+        this.setState({
+            tick: !this.state.tick
         })
     }
     onToggle() {
@@ -67,7 +73,7 @@ class Popup extends Component {
         // // let children = this.state.children;
         const answers=[answer1,answer2,answer3];
         const filtered=answers.filter(function (value, index, arr) {
-            return value!=""
+            return value!==""
         })
         console.log(filtered);
         axios.post('http://' + API_IP + '/project/add-child', {
@@ -149,11 +155,8 @@ class Popup extends Component {
                             }>
                             <ModalHeader>Add/Delete Child</ModalHeader>
                             <ModalBody>
-                                <InputBar placeholder="Enter Question(Index) to Add(Delete)....." name="input" onInputChange={this.onInputChange} />
-                                <h4>Add one or more answers below</h4>
-                                <InputBar placeholder="Enter the first answer...." name="answer1" onInputChange={this.onInputChange} />
-                                <InputBar placeholder="Enter the second answer...." name="answer2" onInputChange={this.onInputChange} />
-                                <InputBar placeholder="Enter the third answer...." name="answer3" onInputChange={this.onInputChange} />
+                                <InputBar placeholder="Enter Question(Index) to Add(Delete)....." name={['input','answer1','answer2','answer3']} onInputChange={this.onInputChange} />
+                                
                             </ModalBody>
                             <ModalFooter>
                                 <Button outline color="success" onClick={this.onAdd}>Add</Button>{" "}

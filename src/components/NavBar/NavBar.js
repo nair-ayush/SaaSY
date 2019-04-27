@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Collapse, Navbar, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+import { Redirect } from "react-router-dom;"
 import './NavBar.css';
 
 class NavBar extends Component {
@@ -21,9 +22,6 @@ class NavBar extends Component {
                                     <NavItem>
                                         <NavLink href="">Home</NavLink>
                                     </NavItem>
-                                    {/* <NavItem>
-                                        <NavLink href="">Profile</NavLink>
-                                    </NavItem> */}
                                     <NavItem>
                                         <NavLink onClick={() => this.props.onRouteChange('signIn')}>Logout</NavLink>
                                     </NavItem>
