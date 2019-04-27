@@ -1,3 +1,6 @@
+.chat {
+	text-align: left;
+}
 div.custom-container {
   background-color: linear-gradient(to left,#69beea , #91332D);
   padding: 1%;

@@ -37,6 +37,10 @@ class Main extends Component {
                 author: 'them',
                 type: 'text',
                 data: { text: 'Womens' }
+            }, {
+                author: 'them',
+                type: 'text',
+                data: { text: 'Kids' }
             }]
         };
         this.onHandleClose = this.onHandleClose.bind(this);
@@ -78,45 +82,75 @@ class Main extends Component {
         this.setState({ clicked: false })
     }
     _onMessageWasSent(message) {
-        console.log(message);
+        console.log(message.data.text);
+        let m = message.data.text;
         let newMessage = [];
         switch (this.state.count) {
             case 0:
-                newMessage = [{
-                    author: 'them',
-                    type: 'text',
-                    data: { text: 'Which collection would you like to shop?' }
-                }, {
-                    author: 'them',
-                    type: 'text',
-                    data: { text: 'SUMMER' }
-                }, {
-                    author: 'them',
-                    type: 'text',
-                    data: { text: 'WINTER' }
-                }]
+                if (m === '1' || m === '2' || m === '3') {
+                    newMessage = [{
+                        author: 'them',
+                        type: 'text',
+                        data: { text: 'Which collection would you like to shop?' }
+                    }, {
+                        author: 'them',
+                        type: 'text',
+                        data: { text: 'SUMMER' }
+                    }, {
+                        author: 'them',
+                        type: 'text',
+                        data: { text: 'WINTER' }
+                    }]
+                    this.setState({
+                        messageList: [...this.state.messageList, message, ...newMessage], count: this.state.count + 1
+                    })
+                }
+
                 break;
             case 1:
-                newMessage = [{
-                    author: 'them',
-                    type: 'text',
-                    data: { text: 'Which area of clothing do you want to shop for summer?' }
-                }, {
-                    author: 'them',
-                    type: 'text',
-                    data: { text: 'TopWear' }
-                }, {
-                    author: 'them',
-                    type: 'text',
-                    data: { text: 'BottomWear' }
-                }]
+                if (m === '1' || m === '2') {
+                    newMessage = [{
+                        author: 'them',
+                        type: 'text',
+                        data: { text: 'Which area of clothing do you want to shop for summer?' }
+                    }, {
+                        author: 'them',
+                        type: 'text',
+                        data: { text: 'TopWear' }
+                    }, {
+                        author: 'them',
+                        type: 'text',
+                        data: { text: 'BottomWear' }
+                    }]
+                    this.setState({
+                        messageList: [...this.state.messageList, message, ...newMessage], count: this.state.count + 1
+                    })
+                }
+
+                break;
+            case 2:
+                if (m === '1' || m === '2') {
+                    newMessage = [{
+                        author: 'them',
+                        type: 'text',
+                        data: { text: 'Choose from any one of the following products' }
+                    }, {
+                        author: 'them',
+                        type: 'text',
+                        data: { text: 'bit.ly/fkasye9ty3bq3' }
+                    }, {
+                        author: 'them',
+                        type: 'text',
+                        data: { text: 'bit.ly/hfw922492vasns' }
+                    }]
+                    this.setState({
+                        messageList: [...this.state.messageList, message, ...newMessage], count: this.state.count + 1
+                    })
+                }
                 break;
 
         }
 
-        this.setState({
-            messageList: [...this.state.messageList, message, ...newMessage], count: this.state.count + 1
-        })
 
     }
 
@@ -171,14 +205,16 @@ class Main extends Component {
                         }}
                         animated />
                 </div>
-                <Launcher
-                    agentProfile={{
-                        teamName: 'SaaSY chat   ',
-                        imageUrl: 'https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png'
-                    }}
-                    onMessageWasSent={this._onMessageWasSent.bind(this)}
-                    messageList={this.state.messageList}
-                />
+                <div className='chat'>
+                    <Launcher
+                        agentProfile={{
+                            teamName: 'SaaSY chat   ',
+                            imageUrl: 'https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png'
+                        }}
+                        onMessageWasSent={this._onMessageWasSent.bind(this)}
+                        messageList={this.state.messageList}
+                    />
+                </div>
                 {this.state.clicked ? <Popup tree={this.state.data} data={this.state.node} modal={this.state.clicked} onModalClose={this.onHandleClose} reflectModalChanges={this.reflectModalChanges} /> : null}
             </div>
         );
