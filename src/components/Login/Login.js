@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Redirect, Link } from 'react-router-dom';
 import { Collapse, Navbar, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 import firebase from '../../containers/Firebase/Firebase';
+import "./Login.css";
 import App from "../../containers/App/App";
 import LOGGED_IN from "../../Constants";
 class SignIn extends Component {
@@ -37,6 +38,7 @@ class SignIn extends Component {
                 this.setState({ loggedIn: true });
             })
             .catch((error) => {
+                alert('Sorry, incorrect email/password!');
                 console.error(error);
             });
 
@@ -52,34 +54,34 @@ class SignIn extends Component {
             );
         }
         return (
-            <div>
-                <div className='navBar'>
+            <div className='login'>
+                {<div className='navBar'>
                     <Navbar color="light" light expand="md">
                         <NavbarBrand href="/">SAASY</NavbarBrand>
-                        
+
                     </Navbar>
-                </div>
-                <article className="br2 shadow-1 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 center">
+                </div>}
+                <article className="br2">
                     <main className="pa4 black-80">
                         <div className="measure">
-                            <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
-                                <legend className="f2 fw6 ph0 mh0">Sign In</legend>
+                            <fieldset id="sign_up" className="ph0 mh0">
+                                <legend className="f2 fw6 ph0 mh0" color="white">Sign In</legend>
                                 <div className="mt3">
                                     <label className="db fw6 lh-copy f6" htmlFor="email-address">Email</label>
-                                    <input className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="email" name="email-address" id="email-address" onChange={this.onEmailChange} />
+                                    <input className="pa2 input-reset bg-transparent hover-white w-100" type="email" name="email-address" id="email-address" onChange={this.onEmailChange} style={{ color: 'white' }} />
                                 </div>
                                 <div className="mv3">
                                     <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
-                                    <input className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="password" name="password" id="password" onChange={this.onPasswordChange} />
+                                    <input className="b pa2 input-reset bg-transparent hover-white w-100" type="password" style={{ color: 'white' }} name="password" id="password" onChange={this.onPasswordChange} />
                                 </div>
                             </fieldset>
                             <div className="">
-                                <input className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit" value="Sign in" onClick={this.handleSubmit} />
+                                <input className="b ph3 pv2 input-reset bg-transparent grow pointer f6 dib mg5" type="submit" style={{ color: 'white' }} value="Sign in" onClick={this.handleSubmit} />
                             </div>
                         </div>
                     </main>
                 </article>
-            </div>
+            </div >
         )
     }
 }

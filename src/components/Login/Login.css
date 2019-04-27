@@ -3,7 +3,7 @@
     border-width: 1px;
 }
 
-.b--black-10 {
+.b--white-10 {
     border-color: rgba(0, 0, 0, .1);
 }
 
@@ -24,8 +24,8 @@
     border-width: 1px;
 }
 
-.b--black {
-    border-color: #000;
+.b--white {
+    border-color: #fff;
 }
 
 .b--transparent {
@@ -88,12 +88,16 @@
     width: 100%;
 }
 
-.black-80 {
+.white-80 {
     color: rgba(0, 0, 0, .8);
 }
 
-.black {
-    color: #000;
+.white {
+    color: #fff;
+}
+
+.white {
+    color: #fff;
 }
 
 .bg-transparent {
@@ -108,12 +112,12 @@
     color: #fff;
 }
 
-.hover-bg-black:hover {
-    background-color: #000;
+.hover-bg-white:hover {
+    background-color: #fff;
 }
 
-.hover-bg-black:focus {
-    background-color: #000;
+.hover-bg-white:focus {
+    background-color: #fff;
 }
 
 .pa0 {
@@ -170,7 +174,7 @@
 }
 
 .measure {
-    max-width: 30em;
+    color: #fff;
 }
 
 .center {
