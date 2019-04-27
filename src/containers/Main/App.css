@@ -1,5 +1,5 @@
 div.custom-container {
-  background-color: grey;
+  background-color: linear-gradient(to left,#69beea , #91332D);
   padding: 1%;
 }
 
@@ -27,14 +27,15 @@ svg.custom .node {
 
 svg.custom path.link {
 	fill: none;
-	stroke: #2593B8;
+	stroke: purple;
 	stroke-width: 1.5px;
 }
 
 .App {
   text-align: center;
   display: flex;
-  flex-direction: column;
+	flex-direction: column;
+	background: linear-gradient(to left,#69beea , #91332D);
 }
 .center {
   display: flex;

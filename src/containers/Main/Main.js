@@ -24,18 +24,19 @@ class Main extends Component {
             width: 1200,
             data: {},
             isOpen: false,
+            count: 0,
             messageList: [{
                 author: 'them',
                 type: 'text',
-                data: { text: 'Are you looking for male wear or female wear?' }
+                data: { text: 'What category would you like to shop?' }
             }, {
                 author: 'them',
                 type: 'text',
-                data: { text: 'option 1' }
+                data: { text: 'Mens' }
             }, {
                 author: 'them',
                 type: 'text',
-                data: { text: 'option 2' }
+                data: { text: 'Womens' }
             }]
         };
         this.onHandleClose = this.onHandleClose.bind(this);
@@ -78,9 +79,45 @@ class Main extends Component {
     }
     _onMessageWasSent(message) {
         console.log(message);
+        let newMessage = [];
+        switch (this.state.count) {
+            case 0:
+                newMessage = [{
+                    author: 'them',
+                    type: 'text',
+                    data: { text: 'Which collection would you like to shop?' }
+                }, {
+                    author: 'them',
+                    type: 'text',
+                    data: { text: 'SUMMER' }
+                }, {
+                    author: 'them',
+                    type: 'text',
+                    data: { text: 'WINTER' }
+                }]
+                break;
+            case 1:
+                newMessage = [{
+                    author: 'them',
+                    type: 'text',
+                    data: { text: 'Which area of clothing do you want to shop for summer?' }
+                }, {
+                    author: 'them',
+                    type: 'text',
+                    data: { text: 'TopWear' }
+                }, {
+                    author: 'them',
+                    type: 'text',
+                    data: { text: 'BottomWear' }
+                }]
+                break;
+
+        }
+
         this.setState({
-            messageList: [...this.state.messageList, message]
+            messageList: [...this.state.messageList, message, ...newMessage], count: this.state.count + 1
         })
+
     }
 
     _sendMessage(text) {
@@ -108,7 +145,7 @@ class Main extends Component {
                         <Collapse isOpen={this.state.isOpen} navbar>
                             <Nav className="ml-auto" navbar>
                                 <NavItem>
-                                    <NavLink href="/">Home</NavLink>
+                                    <NavLink href="/register">Home</NavLink>
                                 </NavItem>
                                 <NavItem>
                                     <NavLink href="/login" onClick={() => {
@@ -124,7 +161,7 @@ class Main extends Component {
                     <Tree
                         data={this.state.data}
                         height={height}
-                        width={width / 1.2}
+                        width={width / 1.6}
                         gProps={{
                             className: 'white-text',
                             onClick: this.onClick

@@ -81,6 +81,7 @@ class SignIn extends Component {
                         </div>
                     </main>
                 </article>
+                {/* <a href='/register'>Register</a> */}
             </div >
         )
     }
