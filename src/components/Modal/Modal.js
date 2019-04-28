@@ -2,9 +2,8 @@ import React, { Component } from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import Lists from "../Lists/Lists";
 import InputBar from "../InputBar/InputBar";
+import { apiIP } from '../../Constants';
 const axios = require('axios');
-
-const API_IP = "13.127.145.212";
 class Popup extends Component {
     constructor(props) {
         super(props);
@@ -25,7 +24,7 @@ class Popup extends Component {
         this.onDelete = this.onDelete.bind(this);
     }
     getChildByName(childName) {
-        axios.post('http://13.127.145.212/project/get-child-by-name', {
+        axios.post('http://' + apiIP + '/project/get-child-by-name', {
             childName: childName
         }).then(response => {
             const node = response.data;
@@ -35,15 +34,15 @@ class Popup extends Component {
             // console.log(node);
         })
     }
-    onTick = () => {
-        this.setState({
-            tick: !this.state.tick
-        })
-    }
+    // onTick = () => {
+    //     this.setState({
+    //         tick: !this.state.tick
+    //     })
+    // }
     onToggle() {
         if (this.state.modal) {
             console.log('closing modal');
-            axios.get('http://13.127.145.212/user/myntra')
+            axios.get('http://' + apiIP + '/user/myntra')
                 .then(response => {
                     // console.log(response.data);
                     this.props.reflectModalChanges(response.data)
@@ -62,10 +61,8 @@ class Popup extends Component {
     }
     onAdd() {
         var { children } = this.state;
-        // const id = children.length ? children[children.length - 1].id + 1 : 1;
-        // // let children = this.state.children;
 
-        axios.post('http://13.127.145.212/project/add-child', {
+        axios.post('http://' + apiIP + '/project/add-child', {
             child: {
                 key: this.state.input
             },
@@ -88,10 +85,9 @@ class Popup extends Component {
     }
     onDelete() {
         let { children, input } = this.state;
-        const child = this.getChild
         this.getChildByName(input);
         children.splice(children.indexOf(this.state.deletedChild), 1);
-        axios.post('http://13.127.145.212/project/delete-child', {
+        axios.post('http://' + apiIP + '/project/delete-child', {
             childId: input,
             parentId: this.props.data._id
         }).then(response => {

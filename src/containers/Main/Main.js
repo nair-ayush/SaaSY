@@ -2,26 +2,23 @@ import React, { Component } from "react";
 import Tree from "react-tree-graph";
 import { Redirect } from "react-router-dom";
 import { Collapse, Navbar, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
-// import NavBar from "../../components/NavBar/NavBar";
+import { Launcher } from "react-chat-window";
+
 import Popup from "../../components/Modal/Modal";
-import LOGGED_IN from "../../Constants";
+import { LOGGED_IN, apiIP } from "../../Constants";
 import firebase from '../../containers/Firebase/Firebase';
 
-import './App.css';
-
-import { Launcher } from "react-chat-window";
+import './Main.css';
 const axios = require('axios');
-
-const API_IP = "13.127.145.212";
 
 class Main extends Component {
     constructor() {
         super();
         this.state = {
             clicked: false,
-            height: 2500,
+            height: window.outerHeight,
             node: null,
-            width: 1200,
+            width: window.outerWidth,
             data: {},
             isOpen: false,
             count: 0,
@@ -46,25 +43,29 @@ class Main extends Component {
         this.onHandleClose = this.onHandleClose.bind(this);
         this.onClick = this.onClick.bind(this);
         this.reflectModalChanges = this.reflectModalChanges.bind(this);
+        this.updateDimensions = this.updateDimensions.bind(this);
+    }
+    updateDimensions = () => {
+        this.setState({ width: window.outerWidth, height: window.outerHeight });
     }
     reflectModalChanges(data) {
         this.setState({ data, clicked: false });
     }
     componentWillMount() {
-        axios.get('http://' + API_IP + '/user/myntra')
+        this.updateDimensions();
+        axios.get('http://' + apiIP + '/user/myntra')
             .then(response => {
                 // console.log(response);
                 this.setState({
                     data: response.data
                 })
             })
-        this.setState({
-            height: window.innerHeight,
-            width: window.innerWidth
-        });
+    }
+    componentDidUpdate() {
+        window.addEventListener('resize', this.updateDimensions);
     }
     onClick = (event, nodeKey) => {
-        axios.post('http://' + API_IP + '/project/get-child-by-name', {
+        axios.post('http://' + apiIP + '/project/get-child-by-name', {
             childName: nodeKey
         }).then(response => {
             const node = response.data;
@@ -148,10 +149,9 @@ class Main extends Component {
                     })
                 }
                 break;
-
+            default:
+                break;
         }
-
-
     }
 
     _sendMessage(text) {
@@ -195,7 +195,7 @@ class Main extends Component {
                     <Tree
                         data={this.state.data}
                         height={height}
-                        width={width / 1.6}
+                        width={width / 1.1}
                         gProps={{
                             className: 'white-text',
                             onClick: this.onClick

@@ -1,10 +1,10 @@
 import React from 'react';
-import { Alert, Input, InputGroup,  InputGroupAddon, InputGroupText } from 'reactstrap';
+import { Input } from 'reactstrap';
 
 const InputBar = ({ placeholder, onInputChange }) => {
     return (
         <div>
-            <Input placeholder={placeholder} onChange={onInputChange}/>
+            <Input placeholder={placeholder} onChange={onInputChange} />
         </div>
     );
 

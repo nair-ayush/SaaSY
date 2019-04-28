@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Redirect } from "react-router-dom";
 import { Collapse, Navbar, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+
 import firebase from "../../containers/Firebase/Firebase";
-import '../../containers/Main/App.css';
+import '../../containers/Main/Main.css';
 
 class Register extends Component {
     state = {
@@ -28,17 +29,12 @@ class Register extends Component {
             .auth()
             .createUserWithEmailAndPassword(email, password)
             .then((user) => {
-                // this.props.onRouteChange('signIn');
                 return <Redirect to="/login" />;
             })
             .catch((error) => {
                 this.setState({ error: error });
             });
     };
-
-    // componentDidMount() {
-    //     debugger;
-    // }
 
     render() {
         return (

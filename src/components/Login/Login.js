@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import { Redirect, Link } from 'react-router-dom';
-import { Collapse, Navbar, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+import { Redirect } from 'react-router-dom';
+import { Navbar, NavbarBrand } from 'reactstrap';
+
 import firebase from '../../containers/Firebase/Firebase';
+import { LOGGED_IN } from '../../Constants';
+
 import "./Login.css";
-import App from "../../containers/App/App";
-import LOGGED_IN from "../../Constants";
 class SignIn extends Component {
     constructor(props) {
         super(props);
@@ -23,9 +24,7 @@ class SignIn extends Component {
         console.log(event.target.value);
         this.setState({ password: event.target.value });
     }
-    // onSubmit = () => {
-    //     this.props.onRouteChange('home');
-    // }
+
     handleSubmit = (event) => {
         event.preventDefault();
         const { email, password } = this.state;
@@ -33,7 +32,6 @@ class SignIn extends Component {
             .auth()
             .signInWithEmailAndPassword(email, password)
             .then(async () => {
-                // this.props.onRouteChange('home');
                 await window.localStorage.setItem(LOGGED_IN, 'yes');
                 this.setState({ loggedIn: true });
             })
@@ -43,9 +41,6 @@ class SignIn extends Component {
             });
 
     }
-    // onRouteChange = () => {
-    //     return <Redirect to="/register" />;
-    // }
 
     render() {
         if (this.state.loggedIn === true) {
@@ -81,7 +76,6 @@ class SignIn extends Component {
                         </div>
                     </main>
                 </article>
-                {/* <a href='/register'>Register</a> */}
             </div >
         )
     }
