@@ -5,7 +5,7 @@ import { Collapse, Navbar, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap
 import { Launcher } from "react-chat-window";
 
 import Popup from "../../components/Modal/Modal";
-import { LOGGED_IN, apiIP } from "../../Constants";
+import { LOGGED_IN, apiIP } from "../../../Constants";
 import firebase from '../../containers/Firebase/Firebase';
 
 import './Main.css';
