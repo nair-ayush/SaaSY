@@ -3,22 +3,39 @@
     "version": "0.1.0",
     "private": true,
     "dependencies": {
+        "axios": "^0.18.0",
         "bootstrap": "^4.3.1",
+        "firebase": "^5.9.2",
+        "pre-commit": "^1.2.2",
         "react": "^16.8.4",
         "react-chat-window": "^1.1.1",
         "react-dom": "^16.8.4",
+        "react-router-dom": "^5.0.0",
         "react-scripts": "2.1.8",
         "react-tree-graph": "^4.0.0",
-        "reactstrap": "^7.1.0"
+        "reactstrap": "^7.1.0",
+        "tachyons": "^4.11.1"
     },
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
-        "test": "react-scripts test",
+        "test": "xo && react-scripts test && htmlhint *.html && stylelint *.css",
         "eject": "react-scripts eject"
     },
+    "stylelint": {
+        "extends": "stylelint-config-recommended"
+    },
+    "pre-commit": [
+        "test"
+    ],
     "eslintConfig": {
         "extends": "react-app"
+    },
+    "devDependencies": {
+        "htmlhint": "^0.11.0",
+        "stylelint": "^10.0.1",
+        "stylelint-config-recommended": "^2.2.0",
+        "xo": "^0.24.0"
     },
     "browserslist": [
         ">0.2%",
