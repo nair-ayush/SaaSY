@@ -52,6 +52,7 @@ class Main extends Component {
         this.setState({ data, clicked: false });
     }
     componentWillMount() {
+        // window.location.reload();
         this.updateDimensions();
         axios.get('http://' + apiIP + '/user/myntra')
             .then(response => {
