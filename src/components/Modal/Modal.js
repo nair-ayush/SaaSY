@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import Lists from "../Lists/Lists";
 import InputBar from "../InputBar/InputBar";
-import { apiIP } from '../../Constants';
+import { apiIP } from '../../../Constants';
 const axios = require('axios');
 class Popup extends Component {
     constructor(props) {
