@@ -1,4 +1,4 @@
-# SASSY by Bubblegum
+# SAASY by Bubblegum
 
 Companies (typically early-stage startups) need to make their product pages more interactive to help users find what they’re looking for. 
 
@@ -43,13 +43,16 @@ As of right now the chat-window is static and keep on the lookout for updates to
 
 ## Dependencies
 
-1. d3.js
-2. reactstrap
-3. react-chat-window
-4. react-tree-graph
-5. axios
-6. firebase
-7. react-router-dom
+1. axios": "^0.18.0"
+2. bootstrap": "^4.3.1"
+3. firebase": "^5.9.2"
+4. pre-commit": "^1.2.2"
+5. react": "^16.8.4"
+6. react-chat-window": "^1.1.1"
+7. react-router-dom": "^5.0.0"
+8. react-tree-graph": "^4.0.0"
+9. reactstrap": "^7.1.0"
+10. tachyons": "^4.11.1
 
 ## Developers
 * [@nair-ayush](https://github.com/nair-ayush/)
@@ -57,7 +60,7 @@ As of right now the chat-window is static and keep on the lookout for updates to
 * [@padiboi](https://github.com/padiboi/)
 ## Contributing
 
-Fork this repo and checkout to new branch off the `develop` branch. `master` for now shows the standard react view from `create-react-app`
+Fork this repo and checkout to new branch off the `develop` branch. `master` and  `develop` level for now.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
